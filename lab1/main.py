@@ -14,13 +14,3 @@ if __name__ == '__main__':
     text = file.read()
     lexer = scanner.lexer
     lexer.input(text)  # Give the lexer some input
-
-    # Tokenize
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break  # No more input
-        column = scanner.find_column(text, tok)
-        if column is not None:
-            print("(%d,%d): %s(%s)" % (tok.lineno, column, tok.type, tok.value))
-

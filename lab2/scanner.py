@@ -1,10 +1,10 @@
 import ply.lex as lex
 
 tokens = (
-    'PLUS',
-    'MINUS',
-    'TIMES',
-    'DIVIDE',
+    # 'PLUS',
+    # 'MINUS',
+    # 'TIMES',
+    # 'DIVIDE',
     'DOTADD',
     'DOTSUB',
     'DOTMLP',
@@ -13,6 +13,7 @@ tokens = (
     'SUBASSIGN',
     'MLPASSIGN',
     'DIVASSIGN',
+    'TRANSPOSE',
     'GOE',
     'LOE',
     'NE',
@@ -26,6 +27,7 @@ t_DOTADD = r'.\+'
 t_DOTSUB = r'.\-'
 t_DOTMLP = r'.\*'
 t_DOTDIV = r'./'
+t_TRANSPOSE = r"'"
 
 t_ADDASSIGN = r'\+='
 t_SUBASSIGN = r'\-='
@@ -37,7 +39,8 @@ t_LOE = r'<='
 t_NE = r'!='
 t_EQ = r'=='
 
-literals = ["'", '+', '-', '*', '/', '=', '(', ')', '[', ']', '{', '}', ',', ';', ':', '>', '<']
+literals = ['+', '-', '*', '/', '=', '(', ')', '[', ']', '{', '}', ',', ';', ':', '>', '<']
+# literals = r"+-/*=<>()[]{}:',;"
 
 t_ignore = ' \t'
 
@@ -82,14 +85,17 @@ def t_ID(t):
     return t
 
 
+
 def t_COMMENT(t):
     r"""\#.*"""
     pass
+
 
 def t_STRING(t):
     r"""\".*?\""""
     t.value = t.value[1:-1]
     return t
+
 
 def t_error(t):
     print("line %d: illegal character '%s'" % (t.lineno, t.value[0]))
@@ -97,7 +103,7 @@ def t_error(t):
 
 
 lexer = lex.lex()
-fh = open("example.txt")
-lexer.input(fh.read())
-for token in lexer:
-    print("line %d: %s(%s)" % (token.lineno, token.type, token.value))
+# fh = open("example.txt")
+# lexer.input(fh.read())
+# for token in lexer:
+#     print("line %d: %s(%s)" % (token.lineno, token.type, token.value))
