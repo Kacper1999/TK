@@ -17,6 +17,10 @@ def p_number(p):
               | FLOATNUM"""
 
 
+def p_matrix_el(p):
+    """matrix_el : ID '[' number ',' number ']'"""
+
+
 def p_expression(p):
     """expression : ID
                   | number
@@ -58,7 +62,7 @@ def p_transposition(p):
     """expression : expression TRANSPOSE"""
 
 
-def p_compare_expression(p): # maybe separate for equal / greater / lower?
+def p_compare_expression(p):  # maybe separate for equal / greater / lower?
     """expression : expression EQ expression
                   | expression NE expression
                   | expression '>' expression
@@ -76,7 +80,12 @@ def p_assign_expression(p):
                  | ID SUBASSIGN expression ';'
                  | ID ADDASSIGN expression ';'
                  | ID MLPASSIGN expression ';'
-                 | ID DIVASSIGN expression ';' """
+                 | ID DIVASSIGN expression ';'
+                 | matrix_el '=' expression ';'
+                 | matrix_el SUBASSIGN expression ';'
+                 | matrix_el ADDASSIGN expression ';'
+                 | matrix_el MLPASSIGN expression ';'
+                 | matrix_el DIVASSIGN expression ';'"""
 
 
 def p_statements_list(p):
