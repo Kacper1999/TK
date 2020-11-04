@@ -117,8 +117,10 @@ def p_while_loop(p):
 
 
 def p_if_else_statement(p):
-    """instruction  : IF '(' expression ')' code_block %prec IFX
-                  | IF '(' expression ')' code_block else_block
+    """instruction : if_block
+    if_block  : IF '(' expression ')' code_block %prec IFX
+                  | IF '(' expression ')' code_block elseif_block else_block
+        elseif_block : ELSE if_block
        else_block : ELSE code_block"""
 
 
