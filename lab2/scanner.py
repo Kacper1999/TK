@@ -46,7 +46,6 @@ t_ignore = ' \t'
 
 reserved = {
     'if': 'IF',
-    'then': 'THEN',
     'else': 'ELSE',
     'for': 'FOR',
     'while': 'WHILE',
