@@ -18,6 +18,7 @@ def p_block(p):
     program : statement
             | program statement
     """
+    p[0] = p[1]  # not sure
 
 
 def p_expression(p):
@@ -25,10 +26,12 @@ def p_expression(p):
             | INTNUM
             | FLOATNUM
             | STRING"""
+    p[0] = p[1]  # not sure
 
 
 def p_negation(p):
     """expression : '-' expression"""
+    p[0] = -p[3]
 
 
 def p_binary_expression(p):
@@ -36,16 +39,26 @@ def p_binary_expression(p):
                   | expression '-' expression
                   | expression '*' expression
                   | expression '/' expression"""
+    if p[2] == '+':
+        p[0] = p[1] + p[3]
+    elif p[2] == '-':
+        p[0] = p[1] - p[3]
+    elif p[2] == '*':
+        p[0] = p[1] * p[3]
+    elif p[2] == '/':
+        p[0] = p[1] / p[3]
 
 
 def p_transpose(p):
     """expression : expression TRANSPOSE"""
+    p[0] = p[1].t()  # not sure
 
 
 def p_create_matrix(p):
     """expression : ZEROES '(' expression ')'
                   | EYE '(' expression ')'
                   | ONES '(' expression ')' """
+    # no idea
 
 
 def p_assign_expression(p):
@@ -64,6 +77,18 @@ def p_assign_expression(p):
                  | ID '[' expression ',' expression ']' ADDASSIGN expression
                  | ID '[' expression ',' expression ']' MLPASSIGN expression
                  | ID '[' expression ',' expression ']' DIVASSIGN expression"""
+    if p[2] == '=':
+        p[0] = p[3]
+    elif p[2] == "-=":
+        p[0] -= p[3]
+    elif p[2] == "+=":
+        p[0] += p[3]
+    elif p[2] == "*=":
+        p[0] *= p[3]
+    elif p[2] == "/=":
+        p[0] /= p[3]
+    # probably not right
+    # not sure if we want anything here
 
 
 def p_binary_matrix_expression(p):
@@ -71,6 +96,14 @@ def p_binary_matrix_expression(p):
                   | expression DOTSUB expression
                   | expression DOTMLP expression
                   | expression DOTDIV expression"""
+    if p[2] == ".+":
+        p[0] = p[1] + p[3]
+    elif p[2] == ".-":
+        p[0] = p[1] - p[3]
+    elif p[2] == ".*":
+        p[0] = p[1] * p[3]
+    elif p[2] == "./":
+        p[0] = p[1] / p[3]
 
 
 def p_compare_expression(p):
@@ -80,6 +113,18 @@ def p_compare_expression(p):
                   | expression GOE expression
                   | expression '<' expression
                   | expression LOE expression"""
+    if p[2] == "==":
+        p[0] = p[1] == p[3]
+    elif p[2] == "!=":
+        p[0] = p[1] != p[3]
+    elif p[2] == ">":
+        p[0] = p[1] > p[3]
+    elif p[2] == ">=":
+        p[0] = p[1] >= p[3]
+    elif p[2] == "<":
+        p[0] = p[1] < p[3]
+    elif p[2] == "<=":
+        p[0] = p[1] <= p[3]
 
 
 def p_list(p):

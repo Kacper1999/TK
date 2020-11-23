@@ -16,3 +16,10 @@ if __name__ == '__main__':
     parser = parser.parser
     text = file.read()
     parser.parse(text, lexer=scanner.lexer)
+
+    while True:
+        question = input('>>> ')
+
+        answer = parser.parse(question, debug=True)
+        if answer is not None:
+            print(answer, "HI")
