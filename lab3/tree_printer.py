@@ -42,7 +42,7 @@ class TreePrinter:
     @addToClass(AST.Block)
     def printTree(self, indent=0):
         for stmt in self.body:
-            stmt.printTree(indent + 1)
+            stmt.printTree(indent)
 
     @addToClass(AST.UnaryMinus)
     def printTree(self, indent=0):
