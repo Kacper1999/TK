@@ -107,3 +107,22 @@ class TreePrinter:
     @addToClass(AST.Break)
     def printTree(self, indent=0):
         print("| " * indent, "BREAK")
+
+    @addToClass(AST.MatrixCreation)
+    def printTree(self, indent=0):
+        print("| " * indent, self.matrix_type)
+        self.size.printTree(indent + 1)
+
+    @addToClass(AST.ArrayElement)
+    def printTree(self, indent=0):
+        print("| " * indent, f"{self.array_name}[{self.index}]")
+
+    @addToClass(AST.Array2DElement)
+    def printTree(self, indent=0):
+        print("| " * indent, f"{self.array_name}[{self.row_i}, {self.col_i}]")
+
+    @addToClass(AST.PrintStmt)
+    def printTree(self, indent=0):
+        print("| " * indent, "PRINT")
+        print("| " * (indent + 1), self.to_print)
+
