@@ -5,6 +5,7 @@ tokens = (
     # 'MINUS',
     # 'TIMES',
     # 'DIVIDE',
+    'USUB',
     'DOTADD',
     'DOTSUB',
     'DOTMLP',

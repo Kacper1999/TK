@@ -1,4 +1,4 @@
-import lab4.AST as AST
+import lab5.AST as AST
 
 
 def addToClass(cls):

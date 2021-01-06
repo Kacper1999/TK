@@ -54,6 +54,6 @@ class Scope:
     def get(self, name):
         if name in self.dict:
             return self.dict[name]
-        if self.parent == None:
+        if self.parent is None:
             return None
         return self.parent.get(name)

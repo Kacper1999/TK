@@ -10,7 +10,8 @@ precedence = (
     ('left', '+', '-'),
     ('left', '*', '/'),
     ('left', 'DOTADD', 'DOTSUB'),
-    ('left', 'DOTMLP', 'DOTDIV')
+    ('left', 'DOTMLP', 'DOTDIV'),
+    ('left', 'USUB')
 )
 
 
@@ -22,7 +23,7 @@ def p_block(p):
     if len(p) == 2:
         p[0] = ast.Block([p[1]])
     if len(p) == 3:
-        p[1].body.append(p[2])  # maybe modifying p[1] is a bad idea
+        p[1].body.append(p[2])
         p[0] = p[1]
 
 
@@ -47,7 +48,7 @@ def p_string(p):
 
 
 def p_negation(p):
-    """expression : '-' expression"""
+    """expression : USUB expression"""
     p[0] = ast.UnaryMinus(p[2])
 
 
@@ -130,33 +131,6 @@ def p_list(p):
     elif len(p) == 4:
         p[1].append(p[3])
         p[0] = p[1]
-
-
-# def p_statement(p):
-#     """
-#     statement : expression ';'
-#          | print_statement
-#          | if_statement
-#          | while_statement
-#          | for_statement
-#          | BREAK ';'
-#          | CONTINUE ';'
-#          | RETURN expression ';'
-#          | ';'
-#          | '{' '}'
-#          | '{' statement_list '}'
-#     """
-#     if len(p) == 2:
-#         p[0] = p[1]
-#     if len(p) == 3:
-#         return ast.Return(p[2])
-
-
-# def p_statements_list(p):
-#     """
-#         statement_list : statement
-#                     | statement_list statement
-#     """
 
 
 def p_stmt_list(p):
